@@ -13,9 +13,9 @@ const BlessOrderHero = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.05),transparent_40%)] pointer-events-none" />
       <div className="relative mx-auto flex max-w-5xl flex-col gap-8 px-6 text-white lg:flex-row lg:items-center">
         <div className="flex-1 space-y-4">
-          <p className="text-xs uppercase tracking-[0.3em] text-amber-300/80">BlessOrder — AI ERP & Sales</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-amber-300/80">AI ERP & Sales</p>
           <h1 className="text-4xl font-bold leading-tight sm:text-5xl text-[#f6f0dd]">
-            BlessOrder — AI ERP & Sales Management System
+            AI ERP & Sales Management System
           </h1>
           <p className="text-lg text-[#d9d4c6]">
             BlessOrder transforms sales, inventory, billing, and operational workflows with an intelligent AI-powered

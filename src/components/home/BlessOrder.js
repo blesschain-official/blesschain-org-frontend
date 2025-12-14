@@ -20,7 +20,7 @@ const BlessOrder = () => {
           <div>
             <p className="mb-3 text-sm uppercase tracking-[0.2em] text-amber-300/80">BlessOrder</p>
             <h3 className="mb-3 text-[34px] font-semibold leading-[1.15] text-[#f6f0dd] sm:text-[42px] md:text-[48px]">
-              BlessOrder — AI ERP & Sales Management
+              AI ERP & Sales Management
             </h3>
             <p className="max-w-xl text-lg leading-relaxed text-[#c9c5b6]">
               BlessOrder transforms sales, inventory, billing, and operational workflows with an intelligent AI-powered

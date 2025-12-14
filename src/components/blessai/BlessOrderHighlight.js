@@ -16,7 +16,7 @@ const BlessOrderHighlight = () => {
       <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 text-white lg:flex-row lg:items-start">
         <div className="flex-1 space-y-3">
           <p className="text-xs uppercase tracking-[0.3em] text-amber-300/70">Core Application</p>
-          <h2 className="text-3xl font-semibold text-[#f6f0dd] sm:text-[34px]">BlessOrder — AI ERP & Sales Management</h2>
+          <h2 className="text-3xl font-semibold text-[#f6f0dd] sm:text-[34px]">AI ERP & Sales Management</h2>
           <p className="text-[15px] leading-relaxed text-[#c9c5b6]">
             BlessOrder is the flagship application inside BlessAI System. It automates sales workflows, synchronizes inventory, generates smart invoices, and provides AI-powered business insights.
           </p>
