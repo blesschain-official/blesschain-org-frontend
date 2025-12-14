@@ -13,6 +13,9 @@ const LoginPage = () => {
     if (email.trim() === 'admin' && password === 'admin') {
       window.localStorage.setItem('bc_user', 'Admin');
       window.dispatchEvent(new Event('bc-auth-change'));
+      window.dispatchEvent(
+        new CustomEvent('bc-toast', { detail: { message: 'Logged in successfully', type: 'success' } }),
+      );
       router.push('/');
     } else {
       setError('Invalid credentials. Use admin / admin.');

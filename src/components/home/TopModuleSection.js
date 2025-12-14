@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const plans = [
   {
@@ -47,6 +47,10 @@ const CheckIcon = () => (
 );
 
 const TopModule = () => {
+  const [selectedPlan, setSelectedPlan] = useState(plans[0]?.name || '');
+
+  const selectPlan = (name) => setSelectedPlan(name);
+
   return (
     <section
       className="w-full"
@@ -57,42 +61,57 @@ const TopModule = () => {
     >
       <div className="mx-auto flex max-w-[83%] flex-col items-center px-4 py-12 sm:py-16 md:py-20">
         <div className="mb-10 text-center text-white">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">BlessAI System — The Intelligent Business Suite</h2>
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">The Intelligent Business Suite</h2>
           <p className="mt-3 text-lg text-white/70">Purpose-built products to cover your core operations.</p>
         </div>
         <div className="grid w-full max-w-full grid-cols-1 gap-6 md:grid-cols-4 md:gap-7">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#1C2332] bg-gradient-to-b from-[#111828] to-[#0E1323] px-8 py-8 shadow-[0_12px_35px_rgba(0,0,0,0.35)]"
-            >
-              <div className="text-center text-white">
-                <h3 className="mb-6 text-[21px] font-semibold tracking-tight">
-                  {plan.name}
-                </h3>
-                <p className="mb-6 text-[15px] font-medium text-white/70">{plan.subtitle}</p>
-                <div className="mx-auto mb-6 h-px w-14 bg-white/15" />
-              </div>
+          {plans.map((plan) => {
+            const isSelected = selectedPlan === plan.name;
+            return (
+              <button
+                type="button"
+                onClick={() => selectPlan(plan.name)}
+                aria-pressed={isSelected}
+                className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gradient-to-b from-[#111828] to-[#0E1323] px-8 py-8 text-left shadow-[0_12px_35px_rgba(0,0,0,0.35)] transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60 ${
+                  isSelected ? 'border-amber-400/70 ring-2 ring-amber-300/40' : 'border-[#1C2332] hover:border-amber-400/60'
+                }`}
+              >
+                {isSelected && (
+                  <div className="absolute right-3 top-3 rounded-full bg-amber-300/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-amber-200">
+                    Selected
+                  </div>
+                )}
+                <div className="text-center text-white">
+                  <h3 className="mb-6 text-[21px] font-semibold tracking-tight">
+                    {plan.name}
+                  </h3>
+                  <p className="mb-6 text-[15px] font-medium text-white/70">{plan.subtitle}</p>
+                  <div className="mx-auto mb-6 h-px w-14 bg-white/15" />
+                </div>
 
-              <ul className="mb-8 space-y-4 text-[17px] font-medium text-white/90">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3">
-                    <CheckIcon />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul className="mb-8 space-y-4 text-[17px] font-medium text-white/90">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-3">
+                      <CheckIcon />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              <div className="mt-auto">
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-center rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-600 px-5 py-3 text-[16px] font-semibold text-white shadow-lg shadow-amber-500/15 transition-all duration-200 hover:scale-[1.02] cursor-pointer"
-                >
-                  Choose Plan
-                </button>
-              </div>
-            </div>
-          ))}
+                <div className="mt-auto">
+                  <div
+                    className={`flex w-full items-center justify-center rounded-full px-5 py-3 text-[16px] font-semibold text-white shadow-lg shadow-amber-500/15 transition-all duration-200 group-hover:scale-[1.02] ${
+                      isSelected
+                        ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300'
+                        : 'bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-600'
+                    }`}
+                  >
+                    {isSelected ? 'Selected' : 'Choose Plan'}
+                  </div>
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>

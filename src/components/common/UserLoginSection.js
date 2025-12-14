@@ -19,6 +19,9 @@ const UserLoginSection = ({ userName }) => {
     if (typeof window !== 'undefined') {
       window.localStorage.removeItem('bc_user');
       window.dispatchEvent(new Event('bc-auth-change'));
+      window.dispatchEvent(
+        new CustomEvent('bc-toast', { detail: { message: 'Logged out successfully', type: 'info' } })
+      );
     }
     setOpen(false);
   };
