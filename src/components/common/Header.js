@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -77,6 +77,8 @@ const Header = () => {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [toast, setToast] = useState({ message: '', type: 'info', visible: false });
+  const toastTimer = useRef(null);
 
   useEffect(() => {
     setMounted(true);
@@ -96,6 +98,20 @@ const Header = () => {
     return () => {
       window.removeEventListener('storage', handleAuthChange);
       window.removeEventListener('bc-auth-change', handleAuthChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleToast = (event) => {
+      const detail = event.detail || {};
+      setToast({ message: detail.message || '', type: detail.type || 'info', visible: true });
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+      toastTimer.current = setTimeout(() => setToast((t) => ({ ...t, visible: false })), 3000);
+    };
+    window.addEventListener('bc-toast', handleToast);
+    return () => {
+      window.removeEventListener('bc-toast', handleToast);
+      if (toastTimer.current) clearTimeout(toastTimer.current);
     };
   }, []);
 
@@ -231,6 +247,19 @@ const Header = () => {
         </div>
       </header>
       {isSearchOpen && <SearchOverlay onClose={() => setIsSearchOpen(false)} />}
+      {toast.visible && (
+        <div className="fixed bottom-6 right-6 z-50">
+          <div
+            className={`min-w-[240px] rounded-xl border px-4 py-3 text-sm shadow-[0_12px_28px_rgba(0,0,0,0.35)] ${
+              toast.type === 'success'
+                ? 'border-emerald-400/50 bg-emerald-400/10 text-emerald-100'
+                : 'border-amber-300/50 bg-amber-300/10 text-amber-100'
+            }`}
+          >
+            {toast.message}
+          </div>
+        </div>
+      )}
     </>
   );
 };
