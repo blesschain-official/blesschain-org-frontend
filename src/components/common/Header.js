@@ -34,14 +34,14 @@ const SearchOverlay = ({ onClose }) => {
       onClick={onClose}
     >
       <div 
-        className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-lg"
+        className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-lg sm:max-w-[90%] mx-4"
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
       >
         <div className="relative">
           <input
             type="text"
             placeholder="Search..."
-            className="w-full p-4 pr-12 bg-transparent focus:outline-none text-lg text-blesschain-primary"
+            className="w-full max-w-[90%] sm:max-w-lg p-4 pr-12 bg-transparent focus:outline-none text-lg text-blesschain-primary"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
@@ -258,12 +258,22 @@ const Header = () => {
                 >
                   <SearchIcon className="w-5 h-5" />
                 </button>
-                <UserLoginSection userName={userName} />
+                <div className="hidden md:flex">
+                  <UserLoginSection userName={userName} />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </header>
+      {!userName && (
+        <div className="md:hidden fixed inset-x-0 bottom-0 z-40">
+          <div className="mx-4 mb-4 flex items-center justify-between rounded-2xl border border-white/10 bg-[#0E0E12]/95 px-4 py-3 shadow-[0_-12px_30px_rgba(0,0,0,0.4)] backdrop-blur">
+            <span className="text-xs uppercase tracking-[0.2em] text-gray-400">Account</span>
+            <UserLoginSection userName={userName} />
+          </div>
+        </div>
+      )}
       {isMobileNavOpen && (
         <div className="md:hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm">
           <div className="absolute inset-x-4 top-4 rounded-2xl border border-white/10 bg-[#0E0E12] shadow-[0_18px_40px_rgba(0,0,0,0.45)]">
@@ -332,6 +342,14 @@ const Header = () => {
                 );
               })}
             </div>
+            {userName && (
+              <div className="border-t border-white/5 px-4 py-4">
+                <div className="text-xs uppercase tracking-[0.2em] text-gray-400">Signed in</div>
+                <div className="mt-2">
+                  <UserLoginSection userName={userName} />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
