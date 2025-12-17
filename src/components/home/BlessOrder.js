@@ -15,8 +15,8 @@ const BlessOrder = () => {
         <div className="absolute left-1/2 top-2 h-64 w-px -translate-x-1/2 bg-gradient-to-b from-amber-400/80 via-amber-300/30 to-transparent" />
       </div>
 
-      <div className="mx-auto flex max-w-[83%] gap-5 px-6 text-white lg:flex-row lg:items-start">
-        <div className="relative z-10 w-1/2 flex flex-1 flex-col gap-6">
+      <div className="mx-auto flex max-w-[83%] flex-col gap-10 px-6 text-white lg:flex-row lg:items-start lg:gap-8">
+        <div className="relative z-10 w-full flex flex-1 flex-col gap-6 lg:w-1/2">
           <div>
             <p className="mb-3 text-sm uppercase tracking-[0.2em] text-amber-300/80">BlessOrder</p>
             <h3 className="mb-3 text-[34px] font-semibold leading-[1.15] text-[#f6f0dd] sm:text-[42px] md:text-[48px]">
@@ -34,7 +34,7 @@ const BlessOrder = () => {
             Get Started
           </button>
 
-          <div className="grid rounded-[18px] max-w-[95%] border border-[#1f2536] bg-[#0f1320] p-6 shadow-[0_16px_40px_rgba(0,0,0,0.35)] md:grid-cols-2 md:divide-x md:divide-[#1f2536]">
+          <div className="grid max-w-full rounded-[18px] border border-[#1f2536] bg-[#0f1320] p-6 shadow-[0_16px_40px_rgba(0,0,0,0.35)] sm:grid-cols-2 sm:divide-x sm:divide-[#1f2536]">
             <FeatureCard
               icon={<InventoryIcon />}
               title="Real Time Inventory sync"
@@ -48,7 +48,7 @@ const BlessOrder = () => {
           </div>
         </div>
 
-        <div className="relative z-10 flex w-1/2 max-w-2xl justify-center lg:justify-end">
+        <div className="relative z-10 flex w-full max-w-2xl justify-center lg:w-1/2 lg:justify-end">
           <div className="relative w-full max-w-full">
             <DashboardCard activeTab={activeTab} onTabChange={setActiveTab} />
             <div className="top-[100%] left-[-14%] hidden w-full max-w-none lg:block">
@@ -57,7 +57,7 @@ const BlessOrder = () => {
           </div>
         </div>
       </div>
-      <div className="relative mt-24 flex justify-center lg:hidden">
+      <div className="relative mt-16 flex justify-center lg:hidden">
         <InventoryCard />
       </div>
     </section>
@@ -119,7 +119,7 @@ const DashboardCard = ({ activeTab, onTabChange }) => {
 
     if (activeTab === 'Inventory') {
       return (
-        <div className="grid flex-1 gap-4 md:grid-cols-2 px-5 pb-5">
+        <div className="grid flex-1 gap-4 px-5 pb-5 md:grid-cols-2">
           <div className="rounded-xl border border-amber-300/15 bg-[#131a2a] p-4">
             <div className="mb-3 flex items-center justify-between text-xs text-[#8f9bad]">
               <span>Inventory</span>
@@ -231,10 +231,10 @@ const DashboardCard = ({ activeTab, onTabChange }) => {
   return (
     <div className="relative overflow-hidden rounded-[18px] border border-[#c18c35] bg-[#0f1320] shadow-[0_18px_48px_rgba(0,0,0,0.45)]">
       <div className="absolute inset-y-0 left-0 w-[3px] bg-gradient-to-b from-transparent via-amber-400 to-transparent" />
-      <div className="flex">
-        <div className="w-[180px] bg-[#0E1420] text-sm text-[#9aa7ba] shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
-          <p className="text-lg font-semibold text-amber-200 py-[1.2rem] border-b mb-4 flex items-center justify-center border-b border-[#1f2736] text-center">BlessOrder</p>
-          <div className="px-5">
+      <div className="flex flex-col overflow-hidden lg:flex-row">
+        <div className="w-full bg-[#0E1420] text-sm text-[#9aa7ba] shadow-[0_12px_30px_rgba(0,0,0,0.35)] lg:w-[200px]">
+          <p className="mb-4 border-b border-[#1f2736] py-[1.2rem] text-center text-lg font-semibold text-amber-200">BlessOrder</p>
+          <div className="flex gap-2 overflow-auto px-4 pb-4 lg:block lg:px-5 lg:pb-5">
             {tabs.map((tab) => {
               const isActive = tab === activeTab;
               return (
@@ -242,21 +242,25 @@ const DashboardCard = ({ activeTab, onTabChange }) => {
                   key={tab}
                   type="button"
                   onClick={() => onTabChange(tab)}
-                  className={`relative flex w-full items-center rounded-lg px-2 py-2 text-left transition hover:text-amber-200 cursor-pointer ${isActive ? 'text-amber-200' : 'text-[#9aa7ba]'
-                    }`}
+                  className={`relative flex items-center whitespace-nowrap rounded-lg px-3 py-2 text-left transition hover:text-amber-200 cursor-pointer ${
+                    isActive ? 'bg-[#1f2736] text-amber-200' : 'text-[#9aa7ba]'
+                  }`}
                 >
                   {isActive && (
-                    <span className="absolute -left-4 h-8 w-[3px] rounded-full bg-amber-300" aria-hidden="true" />
+                    <span
+                      className="absolute left-1 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-amber-300 lg:-left-4"
+                      aria-hidden="true"
+                    />
                   )}
-                  {tab}
+                  <span className="pl-3 lg:pl-0">{tab}</span>
                 </button>
               );
             })}
           </div>
         </div>
         <div className="flex-1 border border-[#1b2233] bg-[#16202B] shadow-[0_12px_32px_rgba(0,0,0,0.35)]">
-          <div className="mb-4 flex items-center justify-between border-b border-[#1f2736] py-5 px-5">
-            <div className="flex items-center gap-5 text-sm text-[#8f9bad] ">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-[#1f2736] px-5 py-5">
+            <div className="flex flex-wrap items-center gap-3 text-sm text-[#8f9bad]">
               {tabs.map((tab) => {
                 const isActive = tab === activeTab;
                 return (
@@ -264,25 +268,19 @@ const DashboardCard = ({ activeTab, onTabChange }) => {
                     key={tab}
                     type="button"
                     onClick={() => onTabChange(tab)}
-                    className={`pb-1 text-sm transition ${isActive ? 'text-[#f6f0dd]' : 'text-[#9aa7ba]'} cursor-pointer`}
+                    className={`relative flex items-center gap-2 rounded-full px-3 py-1 text-xs uppercase tracking-[0.2em] transition hover:text-amber-200 cursor-pointer ${
+                      isActive ? 'bg-[#1f2736] text-amber-200' : ''
+                    }`}
                   >
-                    <span className="relative">
-                      {tab}
-                      {isActive && (
-                        <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-amber-300" aria-hidden="true" />
-                      )}
-                    </span>
+                    {isActive && <span className="h-1.5 w-1.5 rounded-full bg-amber-300" aria-hidden="true" />}
+                    {tab}
                   </button>
                 );
               })}
             </div>
-            <div className="flex items-center gap-6">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full border border-amber-300/50 text-[10px] text-amber-200/70">
-                ○
-              </span>
-            </div>
+            <div className="text-xs uppercase tracking-[0.2em] text-[#8f9bad]">Live</div>
           </div>
-          {renderContent()}
+          <div className="flex flex-col gap-4">{renderContent()}</div>
         </div>
       </div>
     </div>
@@ -297,7 +295,7 @@ const Stat = ({ title, label }) => (
 );
 
 const InventoryCard = () => (
-  <div className="rounded-2xl border border-amber-300/30 bg-[#0f1320] p-5 shadow-[0_18px_40px_rgba(0,0,0,0.45)] mt-5">
+  <div className="w-full rounded-2xl border border-amber-300/30 bg-[#0f1320] p-5 shadow-[0_18px_40px_rgba(0,0,0,0.45)] mt-5 sm:max-w-full">
     <div className="grid gap-4 md:grid-cols-2">
       <div className="rounded-xl border border-amber-300/20 bg-[#131a2a] p-4">
         <div className="mb-3 flex items-center justify-between text-xs text-[#8f9bad]">
