@@ -17,6 +17,8 @@ const EcosystemIndex = () => (
         { href: '/ecosystem/blessvoice', label: 'BlessVoice' },
         { href: '/ecosystem/blessvideo', label: 'BlessVideo' },
         { href: '/ecosystem/blessaivideo', label: 'BlessAIVideo' },
+        { href: '/ecosystem/blesswallet', label: 'BlessWallet' },
+        { href: '/ecosystem/blessanalytics', label: 'BlessAnalytics' },
       ].map((item) => (
         <Link key={item.href} href={item.href} className={linkClass}>
           {item.label}
