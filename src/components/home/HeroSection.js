@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import ArrowIcon from '../icons/ArrowIcon';
 
 const Countdown = () => {
@@ -66,6 +67,33 @@ const UpgradeBanner = () => {
 };
 
 const HeroSection = () => {
+  const router = useRouter();
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const stored = window.localStorage.getItem('bc_user');
+    setUserName(stored || '');
+
+    const handleAuthChange = () => {
+      const updated = window.localStorage.getItem('bc_user');
+      setUserName(updated || '');
+    };
+
+    window.addEventListener('bc-auth-change', handleAuthChange);
+    return () => {
+      window.removeEventListener('bc-auth-change', handleAuthChange);
+    };
+  }, []);
+
+  const handleExplore = () => {
+    if (userName) {
+      router.push('/blessai');
+    } else {
+      router.push('/login');
+    }
+  };
+
   return (
     <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden text-center text-white">
       <video
@@ -86,8 +114,11 @@ const HeroSection = () => {
         <p className="text-lg md:text-xl text-white/80 max-w-3xl mb-10">
           Join the new era of innovation where artificial intelligence meets the blockchain to create a more transparent and intelligent world.
         </p>
-        <button className="flex items-center space-x-3 bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-600 text-white font-bold py-4 px-8 rounded-full hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-          <span>Explore Now</span>
+        <button
+          onClick={handleExplore}
+          className="flex items-center space-x-3 bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-600 text-white font-bold py-4 px-8 rounded-full hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+        >
+          <span>{userName ? 'Explore Now' : 'Login to Explore'}</span>
           <ArrowIcon className="w-5 h-5" />
         </button>
       </div>
@@ -100,4 +131,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-

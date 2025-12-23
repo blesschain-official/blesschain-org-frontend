@@ -38,7 +38,7 @@ const LoginPage = () => {
               BlessChain Access
             </div>
             <div className="space-y-4">
-              <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">
+              <h1 className="text-3xl font-semibold leading-tight sm:text-4xl">
                 Sign in to your secured
                 <span className="block text-amber-200">BlessChain workspace</span>
               </h1>
@@ -48,11 +48,6 @@ const LoginPage = () => {
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-white/10 bg-white/5 p-4 shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
-                <p className="text-sm uppercase tracking-[0.14em] text-gray-400">Realtime status</p>
-                <p className="mt-2 text-2xl font-semibold text-amber-200">99.98% uptime</p>
-                <p className="mt-1 text-sm text-gray-400">Monitored and secured</p>
-              </div>
               <div className="rounded-xl border border-white/10 bg-gradient-to-br from-[#161b2b] to-[#0c0f1a] p-4 shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
                 <p className="text-sm uppercase tracking-[0.14em] text-gray-400">Instant access</p>
                 <p className="mt-2 text-2xl font-semibold text-white">Single-step login</p>
