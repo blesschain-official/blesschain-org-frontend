@@ -14,7 +14,7 @@ const apps = [
 ];
 
 const statusStyles = {
-  Live: { border: 'border-amber-300/40', text: 'text-amber-200' },
+  Live: { border: 'border-emerald-300/50', text: 'text-emerald-50', dot: 'bg-emerald-400' },
   Future: { border: 'border-sky-300/40', text: 'text-sky-200' },
 };
 
@@ -49,8 +49,14 @@ const Verview = () => {
                   const theme = statusStyles[app.status] || statusStyles.Live;
                   return (
                     <div
-                      className={`absolute right-3 top-3 inline-flex w-fit items-center rounded-full border px-3 py-1 text-[12px] font-medium animate-pulse ${theme.border} ${theme.text}`}
+                      className={`absolute right-3 top-3 inline-flex w-fit items-center rounded-full border px-3 py-1 text-[12px] font-medium ${theme.border} ${theme.text}`}
                     >
+                      {theme.dot ? (
+                        <span
+                          className={`mr-2 inline-block h-2.5 w-2.5 rounded-full ${theme.dot} shadow-[0_0_0_4px_rgba(16,185,129,0.18)]`}
+                          aria-hidden="true"
+                        />
+                      ) : null}
                       {app.status}
                     </div>
                   );
